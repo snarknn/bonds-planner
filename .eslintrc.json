@@ -1,0 +1,88 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:react/jsx-runtime",
+        "plugin:react-hooks/recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "overrides": [
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "react-hooks",
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "arrow-parens": ["warn"],
+        "arrow-spacing": "warn",
+        "block-spacing": ["warn", "always"],
+        "brace-style": ["warn", "stroustrup", { "allowSingleLine": true }],
+        "comma-dangle": "off",
+        "comma-spacing": "warn",
+        "curly": ["warn", "multi-line", "consistent"],
+        "eol-last": ["warn", "always"],
+        "eqeqeq": ["warn"],
+        "indent": ["warn", 2, { "SwitchCase": 1 }],
+        "key-spacing": ["warn", { "afterColon": true }],
+        "keyword-spacing": "warn",
+        "lines-between-class-members": [
+          "warn",
+          "always",
+          { "exceptAfterSingleLine": true }
+        ],
+        "max-len": ["warn", 120],
+        "no-console": ["warn", { "allow": ["info", "warn", "error"] }],
+        "no-extra-boolean-cast": "warn",
+        "no-multiple-empty-lines": ["warn", { "max": 1, "maxBOF": 0, "maxEOF": 1 }],
+        "no-param-reassign": "error",
+        "no-prototype-builtins": "warn",
+        "no-restricted-imports": ["warn", {"patterns": ["@mui/*/*", "!@mui/material/locale" ]}],
+        "no-trailing-spaces": "warn",
+        "no-unused-vars": "off",
+        "no-var": "warn",
+        "no-whitespace-before-property": "warn",
+        "object-curly-spacing": ["warn", "always"],
+        "operator-linebreak": [
+          "warn",
+          "after",
+          { "overrides": { "?": "ignore", ":": "ignore" } }
+        ],
+        "padded-blocks": ["warn", "never"],
+        "prefer-const": "warn",
+        "quotes": ["warn", "single", { "avoidEscape": true }],
+        "semi": ["warn", "always", { "omitLastInOneLineBlock": true }],
+        "space-before-blocks": "warn",
+        "space-before-function-paren": [
+          "warn",
+          { "anonymous": "never", "named": "never", "asyncArrow": "always" }
+        ],
+        "space-in-parens": ["warn", "never"],
+        "space-infix-ops": ["warn", { "int32Hint": false }],
+        "spaced-comment": [
+          "warn",
+          "always",
+          {
+            "markers": ["/"],
+            "block": { "exceptions": ["*"] },
+            "line": { "exceptions": ["/"] }
+          }
+        ],
+        "react-hooks/rules-of-hooks": "warn",
+        "react/jsx-no-bind": "warn",
+        "react/jsx-indent": ["warn", 2],
+        "react/jsx-boolean-value": "warn",
+        "@typescript-eslint/no-extra-parens": "warn",
+        "@typescript-eslint/no-unused-vars": "warn",
+        "@typescript-eslint/ban-ts-comment": "warn"
+    }
+}
