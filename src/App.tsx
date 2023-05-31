@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { MainPage } from './Pages/Main';
+import { MainPage } from './pages/Main';
 // import { DetailsPage } from './Pages/Details';
 
 import { store } from './store';
 
-const App = () => (
+const App = () =>
   <Provider store={store}>
     <Router>
       <Routes>
@@ -14,7 +14,6 @@ const App = () => (
         <Route path="*" element={<Navigate to='/' />} />
       </Routes>
     </Router>
-  </Provider>
-);
+  </Provider>;
 
 export default App;
