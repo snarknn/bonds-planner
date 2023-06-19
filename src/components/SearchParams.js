@@ -20,7 +20,6 @@ export const SearchParams = () => {
   } = searchParams;
 
   const dispatch = useDispatch();
-
   /*
     minPrice: number,           // Цена больше этой цифры
     maxPrice: number,           // Цена меньше этой цифры
