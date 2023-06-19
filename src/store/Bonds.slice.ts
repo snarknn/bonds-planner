@@ -5,6 +5,7 @@ export interface Bond {
   id: string,
   bName?: string,
   boardGroup?: number,
+  boardId?: string,
   bPrice?: number,
   bYield?: number,
   bDuration?: number,
@@ -31,6 +32,19 @@ function getErrorMessage(error: unknown) {
   if (error instanceof Error) return error.message;
   return String(error);
 }
+
+const MOEXGetBoardID = async (bond: Bond): Promise<Bond> => {
+  const url = `https://iss.moex.com/iss/securities/${bond.id}.json?iss.meta=off&iss.only=boards&boards.columns=secid,boardid,is_primary`;
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error('Error while loading data.');
+  }
+
+  const json = await response.json();
+  const boardId = json.boards.data.find((e: [string, string, number]) => e[2])[1];
+  return { ...bond, boardId };
+};
 
 const boardGroups = [7, 58, 193, 245];
 
@@ -82,31 +96,12 @@ export const fetchBonds = createAsyncThunk(
           bDuration >= minDuration && bDuration <= maxDuration
         );
 
-      return step3;
+      const step4 = Promise.all((Object.values(step3) as Bond[]).map(MOEXGetBoardID));
+
+      return step4;
     }))
-      .then((res) => res.flat().map(
-
-        /* async */(bond) => {
-          // getBond
-          console.log('bond', bond);
-          return bond;
-        }
-
-        /* async function MOEXboardID(ID) { //узнаем boardid любой бумаги по тикеру
-          const url = `https://iss.moex.com/iss/securities/${ID}.json?iss.meta=off&iss.only=boards&boards.columns=secid,boardid,is_primary`
-          try {
-            const response = await fetch(url)
-            const json = await response.json()
-            boardID = json.boards.data.find(e => e[2] === 1)[1]
-            // console.log("%s. boardID для %s: %s", getFunctionName(), ID, boardID);
-            return boardID
-          } catch (e) {
-            console.log('Ошибка в %s', getFunctionName())
-          }
-        } */
-      ))
-      .catch((error) => rejectWithValue(getErrorMessage(error)))
-
+      .then((res) => res.flat())
+      .catch((error) => rejectWithValue(getErrorMessage(error)));
   }
 );
 
