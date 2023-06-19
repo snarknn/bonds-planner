@@ -33,8 +33,11 @@ function getErrorMessage(error: unknown) {
   return String(error);
 }
 
+const MOEX_BASE_URL = 'https://iss.moex.com/iss/';
+
 const MOEXGetBoardID = async (bond: Bond): Promise<Bond> => {
-  const url = `https://iss.moex.com/iss/securities/${bond.id}.json?iss.meta=off&iss.only=boards&boards.columns=secid,boardid,is_primary`;
+  const url = MOEX_BASE_URL +
+    `securities/${bond.id}.json?iss.meta=off&iss.only=boards&boards.columns=secid,boardid,is_primary`;
   const response = await fetch(url);
 
   if (!response.ok) {
@@ -61,9 +64,8 @@ export const fetchBonds = createAsyncThunk(
     } = getState() as RootState;
 
     return Promise.all(boardGroups.map(async (boardGroup) => {
-      const url =
-        'https://iss.moex.com' +
-        '/iss/engines/stock/markets/bonds/boardgroups/' + boardGroup + '/securities.json' +
+      const url = MOEX_BASE_URL +
+        'engines/stock/markets/bonds/boardgroups/' + boardGroup + '/securities.json' +
         '?iss.dp=comma&iss.meta=off&iss.only=securities,marketdata' +
         '&securities.columns=SECID,SECNAME,PREVLEGALCLOSEPRICE&marketdata.columns=SECID,YIELD,DURATION';
 
@@ -96,7 +98,7 @@ export const fetchBonds = createAsyncThunk(
           bDuration >= minDuration && bDuration <= maxDuration
         );
 
-      const step4 = Promise.all((Object.values(step3) as Bond[]).map(MOEXGetBoardID));
+      const step4 = await Promise.all(step3.map(MOEXGetBoardID));
 
       return step4;
     }))
