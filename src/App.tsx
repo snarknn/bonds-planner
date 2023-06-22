@@ -1,8 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { MainPage } from './pages/Main';
-// import { DetailsPage } from './Pages/Details';
-
 import { store } from './store';
 
 const App = () =>

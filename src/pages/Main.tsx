@@ -15,7 +15,11 @@ export const MainPage = () => {
 
       {status === 'fullfiled' &&
         <div>
-          {bonds.map((b: Bond, i) => <div key={`${b.id}_${b.boardGroup}`}>{i}-{JSON.stringify(b)}</div>)}
+          {bonds.map((b: Bond) =>
+            <div key={`${b.id}_${b.boardGroup}`}>
+              {`${b.id} ${b.bName} Доходность: ${b.bYield} Дюрация: ${b.bDuration} Цена: ${b.bPrice} `}
+            </div>
+          )}
         </div>
       }
       {error ? <span>{`An error occured: ${error}`}</span> : null}

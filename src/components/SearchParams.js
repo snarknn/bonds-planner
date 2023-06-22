@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchBonds } from '../store/Bonds.slice';
 
 import { setParam, resetParams } from '../store/SearchParams.slice';
+import { GET_TRADES_DAYS } from '../constants';
 
 export const SearchParams = () => {
   const searchParams = useSelector(({ searchParams }) => searchParams);
@@ -68,7 +69,7 @@ export const SearchParams = () => {
         <input type="number" value={minVolumePerDay} onChange={handleParam('minVolumePerDay')} />
       </div>
       <div>
-        Совокупный объем за N дней
+        Совокупный объем за {GET_TRADES_DAYS} дней
         <input type="number" value={minVolumePerPeriod} onChange={handleParam('minVolumePerPeriod')} />
       </div>
       <div>
