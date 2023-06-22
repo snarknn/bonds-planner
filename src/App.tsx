@@ -9,9 +9,9 @@ const App = () =>
   <Provider store={store}>
     <Router>
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route path={`${process.env.PUBLIC_URL}/`} element={<MainPage />} />
         {/* <Route path="/details/:factory_id/:year/:month" element={<DetailsPage />} /> */}
-        <Route path="*" element={<Navigate to='/' />} />
+        <Route path="*" element={<Navigate to={`${process.env.PUBLIC_URL}/`} />} />
       </Routes>
     </Router>
   </Provider>;
